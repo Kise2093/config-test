@@ -1,0 +1,198 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - usernamePassword:
+          id: "7b548ce2-104a-472e-9a78-06b54c7b3066"
+          password: "{AQAAABAAAAAgqyvVUcwQQNO/MpK99BvZcjzFsQ7oWUzznIlf18z6aX27N8nHWynzwx3wuBGsCUQX}"
+          scope: GLOBAL
+          username: "root"
+      - usernamePassword:
+          id: "eece9ba3-d83b-488b-aa66-1a1c6fa21dbf"
+          password: "{AQAAABAAAAAgIIcvvaRfwZxo96s8AAPHb0XXZwAJ2RAGYk65k3ottHYCxwf3HI2LSNHYfg9zuCMv}"
+          scope: GLOBAL
+          username: "root"
+      - usernamePassword:
+          id: "32fcde80-3a80-4d2b-ba26-48968cb73b69"
+          password: "{AQAAABAAAAAgTha3sUjSIUNzhsaoe4qVX+OCvRzlnDptVjcLha9WW9oJdJrSEp4SR+ggIYH9ztg3}"
+          scope: GLOBAL
+          username: "root"
+      - gitLabApiTokenImpl:
+          apiToken: "{AQAAABAAAAAgFuHUoAQHPSvPFm64VoHbZ9oS3Uz8yTD5RXYIcXsIw7XW0nAZJxpnzK3xBQCBXOrY}"
+          id: "9e261b2f-779f-4248-b48d-dfbc1ab587f9"
+          scope: GLOBAL
+      - usernamePassword:
+          id: "nexus"
+          password: "{AQAAABAAAAAQXNXjaBFipl/okL8ajyVcJLS94Y3w2OaCLx3kEkcR680=}"
+          scope: GLOBAL
+          username: "admin"
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  clouds:
+  - kubernetes:
+      containerCap: 10
+      containerCapStr: "10"
+      jenkinsTunnel: "my-jenkins-agent.jenkins.svc.cluster.local:50000"
+      jenkinsUrl: "http://my-jenkins.jenkins.svc.cluster.local:8080"
+      name: "kubernetes"
+      namespace: "jenkins"
+      podLabels:
+      - key: "jenkins/my-jenkins-jenkins-agent"
+        value: "true"
+      serverUrl: "https://kubernetes.default"
+      templates:
+      - containers:
+        - args: "^${computer.jnlpmac} ^${computer.name}"
+          envVars:
+          - envVar:
+              key: "JENKINS_URL"
+              value: "http://my-jenkins.jenkins.svc.cluster.local:8080/"
+          image: "jenkins/inbound-agent:4.11.2-4"
+          name: "jnlp"
+          resourceLimitCpu: "512m"
+          resourceLimitMemory: "512Mi"
+          resourceRequestCpu: "512m"
+          resourceRequestMemory: "512Mi"
+          workingDir: "/home/jenkins/agent"
+        id: "474be7705ac6cddeedf68ad2962972dd9921f64c6e534967402794fbf06a21ec"
+        label: "my-jenkins-jenkins-agent"
+        name: "default"
+        namespace: "jenkins"
+        nodeUsageMode: "NORMAL"
+        podRetention: "never"
+        serviceAccount: "default"
+        slaveConnectTimeout: 100
+        slaveConnectTimeoutStr: "100"
+        yamlMergeStrategy: "override"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: true
+  disableRememberMe: false
+  labelAtoms:
+  - name: "built-in"
+  - name: "my-jenkins-jenkins-agent"
+  markupFormatter: "plainText"
+  mode: NORMAL
+  #myViewsTabBar: "standard"
+  numExecutors: 1
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  scmCheckoutRetryCount: 0
+  securityRealm:
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+      - id: "admin"
+        name: "Jenkins Admin"
+        properties:
+        - "apiToken"
+        - mailer:
+            emailAddress: "admin"
+        - preferredProvider:
+            providerId: "default"
+        - timezone:
+            timeZoneName: "Asia/Bangkok"
+  slaveAgentPort: 50000
+  updateCenter:
+    sites:
+    - id: "default"
+      url: "https://updates.jenkins.io/update-center.json"
+  views:
+  - all:
+      name: "all"
+  viewsTabBar: "standard"
+globalCredentialsConfiguration:
+  configuration:
+    providerFilter: "none"
+    typeFilter: "none"
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  gitHooks:
+    allowedOnAgents: false
+    allowedOnController: false
+  gitHostKeyVerificationConfiguration:
+    sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
+  sSHD:
+    port: -1
+unclassified:
+  buildDiscarders:
+    configuredBuildDiscarders:
+    - "jobBuildDiscarder"
+  fingerprints:
+    fingerprintCleanupDisabled: false
+    storage: "file"
+  gitLabConnectionConfig:
+    connections:
+    - apiTokenId: "9e261b2f-779f-4248-b48d-dfbc1ab587f9"
+      clientBuilderId: "autodetect"
+      connectionTimeout: 10
+      ignoreCertificateErrors: false
+      name: "iknowplus"
+      readTimeout: 10
+      url: "https://gitlab.nmgr.iknowplus.co.th"
+    useAuthenticatedEndpoint: true
+  junitTestResultStorage:
+    storage: "file"
+  location:
+    adminAddress: "address not configured yet <nobody@nowhere>"
+    url: "http://my-jenkins:8080/"
+  mailer:
+    charset: "UTF-8"
+    useSsl: false
+    useTls: false
+  pollSCM:
+    pollingThreadCount: 10
+  scmGit:
+    addGitTagAction: false
+    allowSecondFetch: false
+    createAccountBasedOnEmail: false
+    disableGitToolChooser: false
+    hideCredentials: false
+    showEntireCommitSummaryInChanges: false
+    useExistingAccountWithSameEmail: false
+  sonarGlobalConfiguration:
+    buildWrapperEnabled: true
+    installations:
+    - name: "SonarScanner"
+      serverUrl: "https://sonarqube.nmgr.iknowplus.co.th/"
+      triggers:
+        skipScmCause: false
+        skipUpstreamCause: false
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  mavenGlobalConfig:
+    globalSettingsProvider: "standard"
+    settingsProvider: "standard"
+  msBuildSQRunnerInstallation:
+    installations:
+    - name: "SonarScanner"
+      properties:
+      - installSource:
+          installers:
+          - msBuildSonarQubeRunnerInstaller:
+              id: "5.11.0.60783"
+  sonarRunnerInstallation:
+    installations:
+    - name: "SonarScanner"
+      properties:
+      - installSource:
+          installers:
+          - sonarRunnerInstaller:
+              id: "4.8.0.2856"
