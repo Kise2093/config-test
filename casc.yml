@@ -180,20 +180,3 @@ tool:
   mavenGlobalConfig:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
-  msBuildSQRunnerInstallation:
-    installations:
-    - name: "SonarScanner"
-      properties:
-      - installSource:
-          installers:
-          - msBuildSonarQubeRunnerInstaller:
-              id: "5.11.0.60783"
-  sonarRunnerInstallation:
-    installations:
-    - name: "SonarScanner"
-      home: "git"
-      properties:
-      - installSource:
-          installers:
-          - sonarRunnerInstaller:
-              id: "4.8.0.2856"
