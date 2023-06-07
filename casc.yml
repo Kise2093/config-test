@@ -191,7 +191,7 @@ tool:
   sonarRunnerInstallation:
     installations:
     - name: "SonarScanner"
-      home: ""
+      home: "/var/jenkins_home"
       properties:
       - installSource:
           installers:
