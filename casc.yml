@@ -191,7 +191,7 @@ tool:
   sonarRunnerInstallation:
     installations:
     - name: "SonarScanner"
-      home: "/var/jenkins_home/casc_configs"
+      home: "git"
       properties:
       - installSource:
           installers:
